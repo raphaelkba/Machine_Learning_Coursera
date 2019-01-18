@@ -23,12 +23,13 @@ p = zeros(size(X, 1), 1);
 
 % add ones to the dataset
 [rowsX colsX] = size(X);
+% first layer
 a1 = [ones(rowsX,1) X];
 [rowsXTheta1 colsXTheta1] = size(a1*Theta1');
-% first layer
+% second layer
 a2 = sigmoid(a1*Theta1');
 a2_ = [ones(rowsXTheta1,1) a2];
-%second layer
+% output layer
 a3 = sigmoid(a2_*Theta2');
 max_value = max(a3,[],2);
 
