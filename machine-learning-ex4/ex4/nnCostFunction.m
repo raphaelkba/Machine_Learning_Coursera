@@ -62,24 +62,58 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+%% Feedforward
+% input layer
+a1 = [ones(m,1) X];
+% hidden layer
+z2 = a1*Theta1';
+a2 = sigmoid(z2);
+a2_ = [ones(m,1) a2];
+% output layer
+z3 = a2_*Theta2';
+a3 = sigmoid(z3);
+%% Cost function
+% decode y vector into 0s and 1s
+y_decoded = zeros(m,num_labels);
+for i = 1:m
+    y_decoded(i,y(i)) = 1;
+end
+% cost function
+J = (1/m)*sum(sum(-y_decoded.*log(a3) - (1-y_decoded).*log(1-a3)));
+% regularization
+J = J + (lambda/(2*m))*(sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)));
 
+%% Backpropagation
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+for t = 1:m
+    % Feedforward
+    % input layer
+    a1 = [1 X(t,:)];
+    % hidden layer
+    z2 = a1*Theta1';
+    a2 = sigmoid(z2);
+    a2_ = [1 a2];
+    % output layer
+    z3 = a2_*Theta2';
+    a3 = sigmoid(z3);   
+    % error calculation
+    y_ = ([1:num_labels]==y(t));
+    
+    % error output layer
+    d3 = a3' - y_';
+    % error hidden layer
+    d2 = (Theta2'*d3).*[1; sigmoidGradient(z2')];
+    
+    % Accumulate gradient
+    Theta1_grad = Theta1_grad + d2(2:end)*a1;
+    Theta2_grad = Theta2_grad + d3*a2_;
+    
+end
+% Regularized gradients    
+Theta1_grad = (1/m)*Theta1_grad;
+Theta1_grad(:,2:end) = Theta1_grad(:,2:end) + (lambda/m)*Theta1(:,2:end);
+Theta2_grad = (1/m)*Theta2_grad;
+Theta2_grad(:,2:end) = Theta2_grad(:,2:end) + (lambda/m)*Theta2(:,2:end);
 % -------------------------------------------------------------
 
 % =========================================================================
