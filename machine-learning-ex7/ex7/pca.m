@@ -19,10 +19,9 @@ S = zeros(n);
 % Note: When computing the covariance matrix, remember to divide by m (the
 %       number of examples).
 %
-
-
+% computes sigma
 sigma = (1/m)*(X'*X);
-
+% compute the eigenvectors and eigenvalues
 [U, S, V] = svd(sigma);
 
 
