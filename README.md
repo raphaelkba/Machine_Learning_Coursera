@@ -8,7 +8,7 @@ Notice that a template is given by the course.
 
 For this project, you will only require to have Matlab or Octave(>=3.8.0). These solutions have been written in MatlabR2018b and have not being tested in Octave.
 
-## Content of the programming assignments
+## Content of the Programming Assignments
 
 * Exercise 1 - Linear Regression
 * Exercise 2 - Logistic Regression
