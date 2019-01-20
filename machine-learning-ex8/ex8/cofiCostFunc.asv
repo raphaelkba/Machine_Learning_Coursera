@@ -45,10 +45,10 @@ J = (1/2)*sum(sum((X*Theta' - Y).^2.*R));
 J = J + (lambda/2)*sum(sum(Theta.^2)) + (lambda/2)*sum(sum(X.^2)); % Regularization
 % x gradient
 X_grad = (X*Theta' - Y).*R*Theta; 
-X_grad = X_grad + lambda.*X; % Regularization
+X_grad = X_grad + lambda*X; % Regularization
 % theta gradient
 Theta_grad = ((X*Theta' - Y).*R)'*X; 
-Theta_grad = Theta_grad + lambda.*Theta; % Regularization
+Theta_grad = Theta_grad + lambda*Theta; % Regularization
 % =============================================================
 
 grad = [X_grad(:); Theta_grad(:)];
